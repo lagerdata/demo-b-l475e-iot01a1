@@ -16,7 +16,7 @@ steps:
 - name: build
   image: lagerdata/devenv-cortexm-stm32
   commands:
-  - lager exec build
+  - lager exec buildall
 
 - name: flash
   image: lagerdata/devenv-cortexm-stm32
