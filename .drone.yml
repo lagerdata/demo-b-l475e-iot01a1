@@ -25,6 +25,7 @@ steps:
   commands:
   - lager connect --device stm32l4x --interface stlink --transport swd --speed 480 --gateway bold-badger --force
   - lager testrun --serial-device /dev/ttyACM0 --hexfile Test/demo-b-l475e-iot01a1_test.hex --test-runner unity --gateway bold-badger
+  - lager flash --hexfile demo-b-l475e-iot01a1.hex
 
 trigger:
   branch:

@@ -39,6 +39,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 demo-b-l475e-iot01a1.list \
 
+OBJCOPY_HEX += \
+demo-b-l475e-iot01a1.hex \
+
 OBJCOPY_BIN += \
 demo-b-l475e-iot01a1.bin \
 
@@ -62,6 +65,11 @@ demo-b-l475e-iot01a1.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+demo-b-l475e-iot01a1.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "demo-b-l475e-iot01a1.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 demo-b-l475e-iot01a1.bin: $(EXECUTABLES)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "demo-b-l475e-iot01a1.bin"
 	@echo 'Finished building: $@'
@@ -72,7 +80,7 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:
