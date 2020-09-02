@@ -53,4 +53,7 @@ Mkfile.old
 dkms.conf
 
 _build
+Test
+Debug
+Release
 .DS_STORE

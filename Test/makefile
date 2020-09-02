@@ -54,8 +54,8 @@ demo-b-l475e-iot01a1_test.bin \
 all: demo-b-l475e-iot01a1_test.elf secondary-outputs
 
 # Tool invocations
-demo-b-l475e-iot01a1_test.elf: $(OBJS) $(USER_OBJS) /app/STM32L475VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "demo-b-l475e-iot01a1_test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/app/STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="demo-b-l475e-iot01a1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+demo-b-l475e-iot01a1_test.elf: $(OBJS) $(USER_OBJS) Y:\Projects\Lager\vms\projects\st-test\demo-b-l475e-iot01a1\STM32L475VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "demo-b-l475e-iot01a1_test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"Y:\Projects\Lager\vms\projects\st-test\demo-b-l475e-iot01a1\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="demo-b-l475e-iot01a1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
