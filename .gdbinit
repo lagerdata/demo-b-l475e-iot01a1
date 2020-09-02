@@ -25,15 +25,11 @@ monitor reset halt
 
 
 # Load the program executable called "image.elf"
-file Test/demo-b-l475e-iot01a1_test.elf
+file Release/demo-b-l475e-iot01a1.hex
+# file Test/demo-b-l475e-iot01a1_test.elf
 
 
 set breakpoint pending on
 
 load
 break main
-#c
-#s
-#s
-#
-#q

@@ -5,25 +5,25 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000188  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00005470  08000188  08000188  00010188  2**2
+  1 .text         0000546c  08000188  08000188  00010188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       000001c4  080055f8  080055f8  000155f8  2**2
+  2 .rodata       000001c4  080055f4  080055f4  000155f4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080057bc  080057bc  0002000c  2**0
+  3 .ARM.extab    00000000  080057b8  080057b8  0002000c  2**0
                   CONTENTS
-  4 .ARM          00000008  080057bc  080057bc  000157bc  2**2
+  4 .ARM          00000008  080057b8  080057b8  000157b8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  080057c4  080057c4  0002000c  2**0
+  5 .preinit_array 00000000  080057c0  080057c0  0002000c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080057c4  080057c4  000157c4  2**2
+  6 .init_array   00000004  080057c0  080057c0  000157c0  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080057c8  080057c8  000157c8  2**2
+  7 .fini_array   00000004  080057c4  080057c4  000157c4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         0000000c  20000000  080057cc  00020000  2**2
+  8 .data         0000000c  20000000  080057c8  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000700  2000000c  080057d8  0002000c  2**2
+  9 .bss          00000700  2000000c  080057d4  0002000c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000070c  080057d8  0002070c  2**0
+ 10 ._user_heap_stack 00000604  2000070c  080057d4  0002070c  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
@@ -62,7 +62,7 @@ Disassembly of section .text:
  800019e:	bd10      	pop	{r4, pc}
  80001a0:	2000000c 	.word	0x2000000c
  80001a4:	00000000 	.word	0x00000000
- 80001a8:	080055e0 	.word	0x080055e0
+ 80001a8:	080055dc 	.word	0x080055dc
 
 080001ac <frame_dummy>:
  80001ac:	b508      	push	{r3, lr}
@@ -74,7 +74,7 @@ Disassembly of section .text:
  80001ba:	bd08      	pop	{r3, pc}
  80001bc:	00000000 	.word	0x00000000
  80001c0:	20000010 	.word	0x20000010
- 80001c4:	080055e0 	.word	0x080055e0
+ 80001c4:	080055dc 	.word	0x080055dc
 
 080001c8 <setjmp>:
  80001c8:	46ec      	mov	ip, sp
@@ -1514,7 +1514,7 @@ LoopFillZerobss:
 
 /* Call static constructors */
     bl __libc_init_array
- 8000abe:	f004 fd63 	bl	8005588 <__libc_init_array>
+ 8000abe:	f004 fd61 	bl	8005584 <__libc_init_array>
 /* Call the application's entry point.*/
 	bl	main
  8000ac2:	f003 ff9b 	bl	80049fc <main>
@@ -1527,7 +1527,7 @@ LoopForever:
   ldr   sp, =_estack    /* Set stack pointer */
  8000ac8:	20018000 	.word	0x20018000
 	ldr	r3, =_sidata
- 8000acc:	080057cc 	.word	0x080057cc
+ 8000acc:	080057c8 	.word	0x080057c8
 	ldr	r0, =_sdata
  8000ad0:	20000000 	.word	0x20000000
 	ldr	r3, =_edata
@@ -5224,7 +5224,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
  8001fec:	e011      	b.n	8002012 <HAL_RCC_OscConfig+0x2ba>
  8001fee:	bf00      	nop
  8001ff0:	40021000 	.word	0x40021000
- 8001ff4:	080056a4 	.word	0x080056a4
+ 8001ff4:	080056a0 	.word	0x080056a0
  8001ff8:	20000000 	.word	0x20000000
  8001ffc:	20000004 	.word	0x20000004
         {
@@ -6482,7 +6482,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  80026d2:	bf00      	nop
  80026d4:	40022000 	.word	0x40022000
  80026d8:	40021000 	.word	0x40021000
- 80026dc:	080056a4 	.word	0x080056a4
+ 80026dc:	080056a0 	.word	0x080056a0
  80026e0:	20000000 	.word	0x20000000
  80026e4:	20000004 	.word	0x20000004
 
@@ -6685,7 +6685,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  80027e6:	f85d 7b04 	ldr.w	r7, [sp], #4
  80027ea:	4770      	bx	lr
  80027ec:	40021000 	.word	0x40021000
- 80027f0:	080056bc 	.word	0x080056bc
+ 80027f0:	080056b8 	.word	0x080056b8
  80027f4:	00f42400 	.word	0x00f42400
  80027f8:	007a1200 	.word	0x007a1200
 
@@ -6734,7 +6734,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8002834:	4618      	mov	r0, r3
  8002836:	bd80      	pop	{r7, pc}
  8002838:	40021000 	.word	0x40021000
- 800283c:	080056b4 	.word	0x080056b4
+ 800283c:	080056b0 	.word	0x080056b0
 
 08002840 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -6761,7 +6761,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  8002860:	4618      	mov	r0, r3
  8002862:	bd80      	pop	{r7, pc}
  8002864:	40021000 	.word	0x40021000
- 8002868:	080056b4 	.word	0x080056b4
+ 8002868:	080056b0 	.word	0x080056b0
 
 0800286c <RCC_SetFlashLatencyFromMSIRange>:
             voltage range.
@@ -12024,7 +12024,7 @@ static void UnityTestResultsFailBegin(const UNITY_LINE_TYPE line)
  80045e0:	46bd      	mov	sp, r7
  80045e2:	bd80      	pop	{r7, pc}
  80045e4:	20000054 	.word	0x20000054
- 80045e8:	080056f8 	.word	0x080056f8
+ 80045e8:	080056f4 	.word	0x080056f4
 
 080045ec <UnityConcludeTest>:
 
@@ -12094,7 +12094,7 @@ void UnityConcludeTest(void)
  8004644:	bf00      	nop
  8004646:	bd80      	pop	{r7, pc}
  8004648:	20000054 	.word	0x20000054
- 800464c:	080056f0 	.word	0x080056f0
+ 800464c:	080056ec 	.word	0x080056ec
 
 08004650 <UnityAddMsgIfSpecified>:
 
@@ -12161,10 +12161,10 @@ static void UnityAddMsgIfSpecified(const char* msg)
  80046a2:	3708      	adds	r7, #8
  80046a4:	46bd      	mov	sp, r7
  80046a6:	bd80      	pop	{r7, pc}
- 80046a8:	08005700 	.word	0x08005700
+ 80046a8:	080056fc 	.word	0x080056fc
  80046ac:	20000054 	.word	0x20000054
- 80046b0:	080057a4 	.word	0x080057a4
- 80046b4:	080057b0 	.word	0x080057b0
+ 80046b0:	080057a0 	.word	0x080057a0
+ 80046b4:	080057ac 	.word	0x080057ac
 
 080046b8 <UnityAssertEqualNumber>:
 void UnityAssertEqualNumber(const UNITY_INT expected,
@@ -12237,8 +12237,8 @@ void UnityAssertEqualNumber(const UNITY_INT expected,
  800472a:	bd80      	pop	{r7, pc}
  800472c:	20000054 	.word	0x20000054
  8004730:	2000007c 	.word	0x2000007c
- 8004734:	08005704 	.word	0x08005704
- 8004738:	08005710 	.word	0x08005710
+ 8004734:	08005700 	.word	0x08005700
+ 8004738:	0800570c 	.word	0x0800570c
 
 0800473c <UnityAssertGreaterOrLessOrEqualNumber>:
                                            const UNITY_INT actual,
@@ -12413,11 +12413,11 @@ void UnityAssertEqualNumber(const UNITY_INT expected,
  8004872:	bf00      	nop
  8004874:	20000054 	.word	0x20000054
  8004878:	2000007c 	.word	0x2000007c
- 800487c:	08005704 	.word	0x08005704
- 8004880:	08005718 	.word	0x08005718
- 8004884:	08005730 	.word	0x08005730
- 8004888:	08005744 	.word	0x08005744
- 800488c:	08005754 	.word	0x08005754
+ 800487c:	08005700 	.word	0x08005700
+ 8004880:	08005714 	.word	0x08005714
+ 8004884:	0800572c 	.word	0x0800572c
+ 8004888:	08005740 	.word	0x08005740
+ 800488c:	08005750 	.word	0x08005750
 
 08004890 <UnityDefaultTestRun>:
 
@@ -12625,13 +12625,13 @@ int UnityEnd(void)
 }
  80049c0:	4618      	mov	r0, r3
  80049c2:	bd80      	pop	{r7, pc}
- 80049c4:	0800576c 	.word	0x0800576c
+ 80049c4:	08005768 	.word	0x08005768
  80049c8:	20000054 	.word	0x20000054
- 80049cc:	08005784 	.word	0x08005784
- 80049d0:	0800578c 	.word	0x0800578c
- 80049d4:	08005798 	.word	0x08005798
- 80049d8:	080056ec 	.word	0x080056ec
- 80049dc:	080056f8 	.word	0x080056f8
+ 80049cc:	08005780 	.word	0x08005780
+ 80049d0:	08005788 	.word	0x08005788
+ 80049d4:	08005794 	.word	0x08005794
+ 80049d8:	080056e8 	.word	0x080056e8
+ 80049dc:	080056f4 	.word	0x080056f4
 
 080049e0 <setUp>:
 static void MX_SPI3_Init(void);
@@ -12747,17 +12747,17 @@ int main(void)
   while (1)
  8004a60:	e7fe      	b.n	8004a60 <main+0x64>
  8004a62:	bf00      	nop
- 8004a64:	080055f8 	.word	0x080055f8
- 8004a68:	0800560c 	.word	0x0800560c
+ 8004a64:	080055f4 	.word	0x080055f4
+ 8004a68:	08005608 	.word	0x08005608
  8004a6c:	0800526d 	.word	0x0800526d
- 8004a70:	0800562c 	.word	0x0800562c
- 8004a74:	080052dd 	.word	0x080052dd
- 8004a78:	0800564c 	.word	0x0800564c
- 8004a7c:	0800534d 	.word	0x0800534d
- 8004a80:	0800566c 	.word	0x0800566c
- 8004a84:	080053bb 	.word	0x080053bb
- 8004a88:	0800568c 	.word	0x0800568c
- 8004a8c:	0800542f 	.word	0x0800542f
+ 8004a70:	08005628 	.word	0x08005628
+ 8004a74:	080052db 	.word	0x080052db
+ 8004a78:	08005648 	.word	0x08005648
+ 8004a7c:	08005349 	.word	0x08005349
+ 8004a80:	08005668 	.word	0x08005668
+ 8004a84:	080053b7 	.word	0x080053b7
+ 8004a88:	08005688 	.word	0x08005688
+ 8004a8c:	0800542b 	.word	0x0800542b
 
 08004a90 <SystemClock_Config>:
 /**
@@ -12774,7 +12774,7 @@ void SystemClock_Config(void)
  8004a9a:	2244      	movs	r2, #68	; 0x44
  8004a9c:	2100      	movs	r1, #0
  8004a9e:	4618      	mov	r0, r3
- 8004aa0:	f000 fd96 	bl	80055d0 <memset>
+ 8004aa0:	f000 fd94 	bl	80055cc <memset>
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
  8004aa4:	f107 0388 	add.w	r3, r7, #136	; 0x88
  8004aa8:	2200      	movs	r2, #0
@@ -12788,7 +12788,7 @@ void SystemClock_Config(void)
  8004ab6:	2288      	movs	r2, #136	; 0x88
  8004ab8:	2100      	movs	r1, #0
  8004aba:	4618      	mov	r0, r3
- 8004abc:	f000 fd88 	bl	80055d0 <memset>
+ 8004abc:	f000 fd86 	bl	80055cc <memset>
 
   /** Configure LSE Drive Capability
   */
@@ -14147,499 +14147,499 @@ void test_check_min_number_blinks(void)
 	uint32_t num_blink = 0;
  8005272:	2300      	movs	r3, #0
  8005274:	60fb      	str	r3, [r7, #12]
-	uint32_t ms_blink_duration = 1000;
- 8005276:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
- 800527a:	60bb      	str	r3, [r7, #8]
+	uint32_t ms_blink_duration = 100;
+ 8005276:	2364      	movs	r3, #100	; 0x64
+ 8005278:	60bb      	str	r3, [r7, #8]
 	int32_t ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800527c:	68b9      	ldr	r1, [r7, #8]
- 800527e:	68f8      	ldr	r0, [r7, #12]
- 8005280:	f000 f924 	bl	80054cc <ledctrl_blinkled>
- 8005284:	6078      	str	r0, [r7, #4]
+ 800527a:	68b9      	ldr	r1, [r7, #8]
+ 800527c:	68f8      	ldr	r0, [r7, #12]
+ 800527e:	f000 f923 	bl	80054c8 <ledctrl_blinkled>
+ 8005282:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_ERR, ret);
- 8005286:	2314      	movs	r3, #20
- 8005288:	9300      	str	r3, [sp, #0]
- 800528a:	2326      	movs	r3, #38	; 0x26
- 800528c:	2200      	movs	r2, #0
- 800528e:	6879      	ldr	r1, [r7, #4]
- 8005290:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
- 8005294:	f7ff fa10 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005284:	2314      	movs	r3, #20
+ 8005286:	9300      	str	r3, [sp, #0]
+ 8005288:	2326      	movs	r3, #38	; 0x26
+ 800528a:	2200      	movs	r2, #0
+ 800528c:	6879      	ldr	r1, [r7, #4]
+ 800528e:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 8005292:	f7ff fa11 	bl	80046b8 <UnityAssertEqualNumber>
 	num_blink = 1;
- 8005298:	2301      	movs	r3, #1
- 800529a:	60fb      	str	r3, [r7, #12]
+ 8005296:	2301      	movs	r3, #1
+ 8005298:	60fb      	str	r3, [r7, #12]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800529c:	68b9      	ldr	r1, [r7, #8]
- 800529e:	68f8      	ldr	r0, [r7, #12]
- 80052a0:	f000 f914 	bl	80054cc <ledctrl_blinkled>
- 80052a4:	6078      	str	r0, [r7, #4]
+ 800529a:	68b9      	ldr	r1, [r7, #8]
+ 800529c:	68f8      	ldr	r0, [r7, #12]
+ 800529e:	f000 f913 	bl	80054c8 <ledctrl_blinkled>
+ 80052a2:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 80052a6:	2314      	movs	r3, #20
- 80052a8:	9300      	str	r3, [sp, #0]
- 80052aa:	2329      	movs	r3, #41	; 0x29
- 80052ac:	2200      	movs	r2, #0
- 80052ae:	6879      	ldr	r1, [r7, #4]
- 80052b0:	2000      	movs	r0, #0
- 80052b2:	f7ff fa01 	bl	80046b8 <UnityAssertEqualNumber>
+ 80052a4:	2314      	movs	r3, #20
+ 80052a6:	9300      	str	r3, [sp, #0]
+ 80052a8:	2329      	movs	r3, #41	; 0x29
+ 80052aa:	2200      	movs	r2, #0
+ 80052ac:	6879      	ldr	r1, [r7, #4]
+ 80052ae:	2000      	movs	r0, #0
+ 80052b0:	f7ff fa02 	bl	80046b8 <UnityAssertEqualNumber>
 	num_blink = 2;
- 80052b6:	2302      	movs	r3, #2
- 80052b8:	60fb      	str	r3, [r7, #12]
+ 80052b4:	2302      	movs	r3, #2
+ 80052b6:	60fb      	str	r3, [r7, #12]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 80052ba:	68b9      	ldr	r1, [r7, #8]
- 80052bc:	68f8      	ldr	r0, [r7, #12]
- 80052be:	f000 f905 	bl	80054cc <ledctrl_blinkled>
- 80052c2:	6078      	str	r0, [r7, #4]
+ 80052b8:	68b9      	ldr	r1, [r7, #8]
+ 80052ba:	68f8      	ldr	r0, [r7, #12]
+ 80052bc:	f000 f904 	bl	80054c8 <ledctrl_blinkled>
+ 80052c0:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 80052c4:	2314      	movs	r3, #20
- 80052c6:	9300      	str	r3, [sp, #0]
- 80052c8:	232c      	movs	r3, #44	; 0x2c
- 80052ca:	2200      	movs	r2, #0
- 80052cc:	6879      	ldr	r1, [r7, #4]
- 80052ce:	2000      	movs	r0, #0
- 80052d0:	f7ff f9f2 	bl	80046b8 <UnityAssertEqualNumber>
+ 80052c2:	2314      	movs	r3, #20
+ 80052c4:	9300      	str	r3, [sp, #0]
+ 80052c6:	232c      	movs	r3, #44	; 0x2c
+ 80052c8:	2200      	movs	r2, #0
+ 80052ca:	6879      	ldr	r1, [r7, #4]
+ 80052cc:	2000      	movs	r0, #0
+ 80052ce:	f7ff f9f3 	bl	80046b8 <UnityAssertEqualNumber>
 }
- 80052d4:	bf00      	nop
- 80052d6:	3710      	adds	r7, #16
- 80052d8:	46bd      	mov	sp, r7
- 80052da:	bd80      	pop	{r7, pc}
+ 80052d2:	bf00      	nop
+ 80052d4:	3710      	adds	r7, #16
+ 80052d6:	46bd      	mov	sp, r7
+ 80052d8:	bd80      	pop	{r7, pc}
 
-080052dc <test_check_max_number_blinks>:
+080052da <test_check_max_number_blinks>:
 
 void test_check_max_number_blinks(void)
 {
- 80052dc:	b580      	push	{r7, lr}
- 80052de:	b086      	sub	sp, #24
- 80052e0:	af02      	add	r7, sp, #8
+ 80052da:	b580      	push	{r7, lr}
+ 80052dc:	b086      	sub	sp, #24
+ 80052de:	af02      	add	r7, sp, #8
 	uint32_t num_blink = 10;
- 80052e2:	230a      	movs	r3, #10
- 80052e4:	60fb      	str	r3, [r7, #12]
-	uint32_t ms_blink_duration = 1000;
- 80052e6:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
- 80052ea:	60bb      	str	r3, [r7, #8]
+ 80052e0:	230a      	movs	r3, #10
+ 80052e2:	60fb      	str	r3, [r7, #12]
+	uint32_t ms_blink_duration = 100;
+ 80052e4:	2364      	movs	r3, #100	; 0x64
+ 80052e6:	60bb      	str	r3, [r7, #8]
 	int32_t ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 80052ec:	68b9      	ldr	r1, [r7, #8]
- 80052ee:	68f8      	ldr	r0, [r7, #12]
- 80052f0:	f000 f8ec 	bl	80054cc <ledctrl_blinkled>
- 80052f4:	6078      	str	r0, [r7, #4]
+ 80052e8:	68b9      	ldr	r1, [r7, #8]
+ 80052ea:	68f8      	ldr	r0, [r7, #12]
+ 80052ec:	f000 f8ec 	bl	80054c8 <ledctrl_blinkled>
+ 80052f0:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_ERR, ret);
- 80052f6:	2314      	movs	r3, #20
- 80052f8:	9300      	str	r3, [sp, #0]
- 80052fa:	2334      	movs	r3, #52	; 0x34
- 80052fc:	2200      	movs	r2, #0
- 80052fe:	6879      	ldr	r1, [r7, #4]
- 8005300:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
- 8005304:	f7ff f9d8 	bl	80046b8 <UnityAssertEqualNumber>
+ 80052f2:	2314      	movs	r3, #20
+ 80052f4:	9300      	str	r3, [sp, #0]
+ 80052f6:	2334      	movs	r3, #52	; 0x34
+ 80052f8:	2200      	movs	r2, #0
+ 80052fa:	6879      	ldr	r1, [r7, #4]
+ 80052fc:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 8005300:	f7ff f9da 	bl	80046b8 <UnityAssertEqualNumber>
 	num_blink = 9;
- 8005308:	2309      	movs	r3, #9
- 800530a:	60fb      	str	r3, [r7, #12]
+ 8005304:	2309      	movs	r3, #9
+ 8005306:	60fb      	str	r3, [r7, #12]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800530c:	68b9      	ldr	r1, [r7, #8]
- 800530e:	68f8      	ldr	r0, [r7, #12]
- 8005310:	f000 f8dc 	bl	80054cc <ledctrl_blinkled>
- 8005314:	6078      	str	r0, [r7, #4]
+ 8005308:	68b9      	ldr	r1, [r7, #8]
+ 800530a:	68f8      	ldr	r0, [r7, #12]
+ 800530c:	f000 f8dc 	bl	80054c8 <ledctrl_blinkled>
+ 8005310:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 8005316:	2314      	movs	r3, #20
- 8005318:	9300      	str	r3, [sp, #0]
- 800531a:	2337      	movs	r3, #55	; 0x37
- 800531c:	2200      	movs	r2, #0
- 800531e:	6879      	ldr	r1, [r7, #4]
- 8005320:	2000      	movs	r0, #0
- 8005322:	f7ff f9c9 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005312:	2314      	movs	r3, #20
+ 8005314:	9300      	str	r3, [sp, #0]
+ 8005316:	2337      	movs	r3, #55	; 0x37
+ 8005318:	2200      	movs	r2, #0
+ 800531a:	6879      	ldr	r1, [r7, #4]
+ 800531c:	2000      	movs	r0, #0
+ 800531e:	f7ff f9cb 	bl	80046b8 <UnityAssertEqualNumber>
 	num_blink = 8;
- 8005326:	2308      	movs	r3, #8
- 8005328:	60fb      	str	r3, [r7, #12]
+ 8005322:	2308      	movs	r3, #8
+ 8005324:	60fb      	str	r3, [r7, #12]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800532a:	68b9      	ldr	r1, [r7, #8]
- 800532c:	68f8      	ldr	r0, [r7, #12]
- 800532e:	f000 f8cd 	bl	80054cc <ledctrl_blinkled>
- 8005332:	6078      	str	r0, [r7, #4]
+ 8005326:	68b9      	ldr	r1, [r7, #8]
+ 8005328:	68f8      	ldr	r0, [r7, #12]
+ 800532a:	f000 f8cd 	bl	80054c8 <ledctrl_blinkled>
+ 800532e:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 8005334:	2314      	movs	r3, #20
- 8005336:	9300      	str	r3, [sp, #0]
- 8005338:	233a      	movs	r3, #58	; 0x3a
- 800533a:	2200      	movs	r2, #0
- 800533c:	6879      	ldr	r1, [r7, #4]
- 800533e:	2000      	movs	r0, #0
- 8005340:	f7ff f9ba 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005330:	2314      	movs	r3, #20
+ 8005332:	9300      	str	r3, [sp, #0]
+ 8005334:	233a      	movs	r3, #58	; 0x3a
+ 8005336:	2200      	movs	r2, #0
+ 8005338:	6879      	ldr	r1, [r7, #4]
+ 800533a:	2000      	movs	r0, #0
+ 800533c:	f7ff f9bc 	bl	80046b8 <UnityAssertEqualNumber>
 }
- 8005344:	bf00      	nop
- 8005346:	3710      	adds	r7, #16
- 8005348:	46bd      	mov	sp, r7
- 800534a:	bd80      	pop	{r7, pc}
+ 8005340:	bf00      	nop
+ 8005342:	3710      	adds	r7, #16
+ 8005344:	46bd      	mov	sp, r7
+ 8005346:	bd80      	pop	{r7, pc}
 
-0800534c <test_check_min_blink_duration>:
+08005348 <test_check_min_blink_duration>:
 
 void test_check_min_blink_duration(void)
 {
- 800534c:	b580      	push	{r7, lr}
- 800534e:	b086      	sub	sp, #24
- 8005350:	af02      	add	r7, sp, #8
+ 8005348:	b580      	push	{r7, lr}
+ 800534a:	b086      	sub	sp, #24
+ 800534c:	af02      	add	r7, sp, #8
 	uint32_t num_blink = 2;
- 8005352:	2302      	movs	r3, #2
- 8005354:	60fb      	str	r3, [r7, #12]
+ 800534e:	2302      	movs	r3, #2
+ 8005350:	60fb      	str	r3, [r7, #12]
 	uint32_t ms_blink_duration = 0;
- 8005356:	2300      	movs	r3, #0
- 8005358:	60bb      	str	r3, [r7, #8]
+ 8005352:	2300      	movs	r3, #0
+ 8005354:	60bb      	str	r3, [r7, #8]
 	int32_t ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800535a:	68b9      	ldr	r1, [r7, #8]
- 800535c:	68f8      	ldr	r0, [r7, #12]
- 800535e:	f000 f8b5 	bl	80054cc <ledctrl_blinkled>
- 8005362:	6078      	str	r0, [r7, #4]
+ 8005356:	68b9      	ldr	r1, [r7, #8]
+ 8005358:	68f8      	ldr	r0, [r7, #12]
+ 800535a:	f000 f8b5 	bl	80054c8 <ledctrl_blinkled>
+ 800535e:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_ERR, ret);
- 8005364:	2314      	movs	r3, #20
- 8005366:	9300      	str	r3, [sp, #0]
- 8005368:	2342      	movs	r3, #66	; 0x42
- 800536a:	2200      	movs	r2, #0
- 800536c:	6879      	ldr	r1, [r7, #4]
- 800536e:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
- 8005372:	f7ff f9a1 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005360:	2314      	movs	r3, #20
+ 8005362:	9300      	str	r3, [sp, #0]
+ 8005364:	2342      	movs	r3, #66	; 0x42
+ 8005366:	2200      	movs	r2, #0
+ 8005368:	6879      	ldr	r1, [r7, #4]
+ 800536a:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 800536e:	f7ff f9a3 	bl	80046b8 <UnityAssertEqualNumber>
 	ms_blink_duration = 1;
- 8005376:	2301      	movs	r3, #1
- 8005378:	60bb      	str	r3, [r7, #8]
+ 8005372:	2301      	movs	r3, #1
+ 8005374:	60bb      	str	r3, [r7, #8]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800537a:	68b9      	ldr	r1, [r7, #8]
- 800537c:	68f8      	ldr	r0, [r7, #12]
- 800537e:	f000 f8a5 	bl	80054cc <ledctrl_blinkled>
- 8005382:	6078      	str	r0, [r7, #4]
+ 8005376:	68b9      	ldr	r1, [r7, #8]
+ 8005378:	68f8      	ldr	r0, [r7, #12]
+ 800537a:	f000 f8a5 	bl	80054c8 <ledctrl_blinkled>
+ 800537e:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 8005384:	2314      	movs	r3, #20
- 8005386:	9300      	str	r3, [sp, #0]
- 8005388:	2345      	movs	r3, #69	; 0x45
- 800538a:	2200      	movs	r2, #0
- 800538c:	6879      	ldr	r1, [r7, #4]
- 800538e:	2000      	movs	r0, #0
- 8005390:	f7ff f992 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005380:	2314      	movs	r3, #20
+ 8005382:	9300      	str	r3, [sp, #0]
+ 8005384:	2345      	movs	r3, #69	; 0x45
+ 8005386:	2200      	movs	r2, #0
+ 8005388:	6879      	ldr	r1, [r7, #4]
+ 800538a:	2000      	movs	r0, #0
+ 800538c:	f7ff f994 	bl	80046b8 <UnityAssertEqualNumber>
 	ms_blink_duration = 2;
- 8005394:	2302      	movs	r3, #2
- 8005396:	60bb      	str	r3, [r7, #8]
+ 8005390:	2302      	movs	r3, #2
+ 8005392:	60bb      	str	r3, [r7, #8]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 8005398:	68b9      	ldr	r1, [r7, #8]
- 800539a:	68f8      	ldr	r0, [r7, #12]
- 800539c:	f000 f896 	bl	80054cc <ledctrl_blinkled>
- 80053a0:	6078      	str	r0, [r7, #4]
+ 8005394:	68b9      	ldr	r1, [r7, #8]
+ 8005396:	68f8      	ldr	r0, [r7, #12]
+ 8005398:	f000 f896 	bl	80054c8 <ledctrl_blinkled>
+ 800539c:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 80053a2:	2314      	movs	r3, #20
- 80053a4:	9300      	str	r3, [sp, #0]
- 80053a6:	2348      	movs	r3, #72	; 0x48
- 80053a8:	2200      	movs	r2, #0
- 80053aa:	6879      	ldr	r1, [r7, #4]
- 80053ac:	2000      	movs	r0, #0
- 80053ae:	f7ff f983 	bl	80046b8 <UnityAssertEqualNumber>
+ 800539e:	2314      	movs	r3, #20
+ 80053a0:	9300      	str	r3, [sp, #0]
+ 80053a2:	2348      	movs	r3, #72	; 0x48
+ 80053a4:	2200      	movs	r2, #0
+ 80053a6:	6879      	ldr	r1, [r7, #4]
+ 80053a8:	2000      	movs	r0, #0
+ 80053aa:	f7ff f985 	bl	80046b8 <UnityAssertEqualNumber>
 }
- 80053b2:	bf00      	nop
- 80053b4:	3710      	adds	r7, #16
- 80053b6:	46bd      	mov	sp, r7
- 80053b8:	bd80      	pop	{r7, pc}
+ 80053ae:	bf00      	nop
+ 80053b0:	3710      	adds	r7, #16
+ 80053b2:	46bd      	mov	sp, r7
+ 80053b4:	bd80      	pop	{r7, pc}
 
-080053ba <test_check_max_blink_duration>:
+080053b6 <test_check_max_blink_duration>:
 
 void test_check_max_blink_duration(void)
 {
- 80053ba:	b580      	push	{r7, lr}
- 80053bc:	b086      	sub	sp, #24
- 80053be:	af02      	add	r7, sp, #8
+ 80053b6:	b580      	push	{r7, lr}
+ 80053b8:	b086      	sub	sp, #24
+ 80053ba:	af02      	add	r7, sp, #8
 	uint32_t num_blink = 2;
- 80053c0:	2302      	movs	r3, #2
- 80053c2:	60fb      	str	r3, [r7, #12]
+ 80053bc:	2302      	movs	r3, #2
+ 80053be:	60fb      	str	r3, [r7, #12]
 	uint32_t ms_blink_duration = 5000;
- 80053c4:	f241 3388 	movw	r3, #5000	; 0x1388
- 80053c8:	60bb      	str	r3, [r7, #8]
+ 80053c0:	f241 3388 	movw	r3, #5000	; 0x1388
+ 80053c4:	60bb      	str	r3, [r7, #8]
 	int32_t ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 80053ca:	68b9      	ldr	r1, [r7, #8]
- 80053cc:	68f8      	ldr	r0, [r7, #12]
- 80053ce:	f000 f87d 	bl	80054cc <ledctrl_blinkled>
- 80053d2:	6078      	str	r0, [r7, #4]
+ 80053c6:	68b9      	ldr	r1, [r7, #8]
+ 80053c8:	68f8      	ldr	r0, [r7, #12]
+ 80053ca:	f000 f87d 	bl	80054c8 <ledctrl_blinkled>
+ 80053ce:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_ERR, ret);
- 80053d4:	2314      	movs	r3, #20
- 80053d6:	9300      	str	r3, [sp, #0]
- 80053d8:	2350      	movs	r3, #80	; 0x50
- 80053da:	2200      	movs	r2, #0
- 80053dc:	6879      	ldr	r1, [r7, #4]
- 80053de:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
- 80053e2:	f7ff f969 	bl	80046b8 <UnityAssertEqualNumber>
+ 80053d0:	2314      	movs	r3, #20
+ 80053d2:	9300      	str	r3, [sp, #0]
+ 80053d4:	2350      	movs	r3, #80	; 0x50
+ 80053d6:	2200      	movs	r2, #0
+ 80053d8:	6879      	ldr	r1, [r7, #4]
+ 80053da:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 80053de:	f7ff f96b 	bl	80046b8 <UnityAssertEqualNumber>
 	ms_blink_duration = 2999;
- 80053e6:	f640 33b7 	movw	r3, #2999	; 0xbb7
- 80053ea:	60bb      	str	r3, [r7, #8]
+ 80053e2:	f640 33b7 	movw	r3, #2999	; 0xbb7
+ 80053e6:	60bb      	str	r3, [r7, #8]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 80053ec:	68b9      	ldr	r1, [r7, #8]
- 80053ee:	68f8      	ldr	r0, [r7, #12]
- 80053f0:	f000 f86c 	bl	80054cc <ledctrl_blinkled>
- 80053f4:	6078      	str	r0, [r7, #4]
+ 80053e8:	68b9      	ldr	r1, [r7, #8]
+ 80053ea:	68f8      	ldr	r0, [r7, #12]
+ 80053ec:	f000 f86c 	bl	80054c8 <ledctrl_blinkled>
+ 80053f0:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 80053f6:	2314      	movs	r3, #20
- 80053f8:	9300      	str	r3, [sp, #0]
- 80053fa:	2353      	movs	r3, #83	; 0x53
- 80053fc:	2200      	movs	r2, #0
- 80053fe:	6879      	ldr	r1, [r7, #4]
- 8005400:	2000      	movs	r0, #0
- 8005402:	f7ff f959 	bl	80046b8 <UnityAssertEqualNumber>
+ 80053f2:	2314      	movs	r3, #20
+ 80053f4:	9300      	str	r3, [sp, #0]
+ 80053f6:	2353      	movs	r3, #83	; 0x53
+ 80053f8:	2200      	movs	r2, #0
+ 80053fa:	6879      	ldr	r1, [r7, #4]
+ 80053fc:	2000      	movs	r0, #0
+ 80053fe:	f7ff f95b 	bl	80046b8 <UnityAssertEqualNumber>
 	ms_blink_duration = 2998;
- 8005406:	f640 33b6 	movw	r3, #2998	; 0xbb6
- 800540a:	60bb      	str	r3, [r7, #8]
+ 8005402:	f640 33b6 	movw	r3, #2998	; 0xbb6
+ 8005406:	60bb      	str	r3, [r7, #8]
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
- 800540c:	68b9      	ldr	r1, [r7, #8]
- 800540e:	68f8      	ldr	r0, [r7, #12]
- 8005410:	f000 f85c 	bl	80054cc <ledctrl_blinkled>
- 8005414:	6078      	str	r0, [r7, #4]
+ 8005408:	68b9      	ldr	r1, [r7, #8]
+ 800540a:	68f8      	ldr	r0, [r7, #12]
+ 800540c:	f000 f85c 	bl	80054c8 <ledctrl_blinkled>
+ 8005410:	6078      	str	r0, [r7, #4]
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 8005416:	2314      	movs	r3, #20
- 8005418:	9300      	str	r3, [sp, #0]
- 800541a:	2356      	movs	r3, #86	; 0x56
- 800541c:	2200      	movs	r2, #0
- 800541e:	6879      	ldr	r1, [r7, #4]
- 8005420:	2000      	movs	r0, #0
- 8005422:	f7ff f949 	bl	80046b8 <UnityAssertEqualNumber>
+ 8005412:	2314      	movs	r3, #20
+ 8005414:	9300      	str	r3, [sp, #0]
+ 8005416:	2356      	movs	r3, #86	; 0x56
+ 8005418:	2200      	movs	r2, #0
+ 800541a:	6879      	ldr	r1, [r7, #4]
+ 800541c:	2000      	movs	r0, #0
+ 800541e:	f7ff f94b 	bl	80046b8 <UnityAssertEqualNumber>
 }
- 8005426:	bf00      	nop
- 8005428:	3710      	adds	r7, #16
- 800542a:	46bd      	mov	sp, r7
- 800542c:	bd80      	pop	{r7, pc}
+ 8005422:	bf00      	nop
+ 8005424:	3710      	adds	r7, #16
+ 8005426:	46bd      	mov	sp, r7
+ 8005428:	bd80      	pop	{r7, pc}
 
-0800542e <test_total_blink_length>:
+0800542a <test_total_blink_length>:
 
 void test_total_blink_length(void)
 {
- 800542e:	b590      	push	{r4, r7, lr}
- 8005430:	b087      	sub	sp, #28
- 8005432:	af02      	add	r7, sp, #8
+ 800542a:	b590      	push	{r4, r7, lr}
+ 800542c:	b087      	sub	sp, #28
+ 800542e:	af02      	add	r7, sp, #8
 	uint32_t blink_duration = 500;
- 8005434:	f44f 73fa 	mov.w	r3, #500	; 0x1f4
- 8005438:	60bb      	str	r3, [r7, #8]
+ 8005430:	f44f 73fa 	mov.w	r3, #500	; 0x1f4
+ 8005434:	60bb      	str	r3, [r7, #8]
 	for(int i=1;i<5;i++){
- 800543a:	2301      	movs	r3, #1
- 800543c:	60fb      	str	r3, [r7, #12]
- 800543e:	e03d      	b.n	80054bc <test_total_blink_length+0x8e>
+ 8005436:	2301      	movs	r3, #1
+ 8005438:	60fb      	str	r3, [r7, #12]
+ 800543a:	e03d      	b.n	80054b8 <test_total_blink_length+0x8e>
 		uint32_t t = HAL_GetTick();
- 8005440:	f7fb fbb8 	bl	8000bb4 <HAL_GetTick>
- 8005444:	6078      	str	r0, [r7, #4]
+ 800543c:	f7fb fbba 	bl	8000bb4 <HAL_GetTick>
+ 8005440:	6078      	str	r0, [r7, #4]
 		int32_t ret = ledctrl_blinkled(i, blink_duration);
- 8005446:	68fb      	ldr	r3, [r7, #12]
- 8005448:	68b9      	ldr	r1, [r7, #8]
- 800544a:	4618      	mov	r0, r3
- 800544c:	f000 f83e 	bl	80054cc <ledctrl_blinkled>
- 8005450:	6038      	str	r0, [r7, #0]
+ 8005442:	68fb      	ldr	r3, [r7, #12]
+ 8005444:	68b9      	ldr	r1, [r7, #8]
+ 8005446:	4618      	mov	r0, r3
+ 8005448:	f000 f83e 	bl	80054c8 <ledctrl_blinkled>
+ 800544c:	6038      	str	r0, [r7, #0]
 		TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
- 8005452:	2314      	movs	r3, #20
- 8005454:	9300      	str	r3, [sp, #0]
- 8005456:	235f      	movs	r3, #95	; 0x5f
- 8005458:	2200      	movs	r2, #0
- 800545a:	6839      	ldr	r1, [r7, #0]
- 800545c:	2000      	movs	r0, #0
- 800545e:	f7ff f92b 	bl	80046b8 <UnityAssertEqualNumber>
+ 800544e:	2314      	movs	r3, #20
+ 8005450:	9300      	str	r3, [sp, #0]
+ 8005452:	235f      	movs	r3, #95	; 0x5f
+ 8005454:	2200      	movs	r2, #0
+ 8005456:	6839      	ldr	r1, [r7, #0]
+ 8005458:	2000      	movs	r0, #0
+ 800545a:	f7ff f92d 	bl	80046b8 <UnityAssertEqualNumber>
 		TEST_ASSERT_GREATER_THAN_UINT32(i*blink_duration - 50, HAL_GetTick() - t);
- 8005462:	68fb      	ldr	r3, [r7, #12]
- 8005464:	68ba      	ldr	r2, [r7, #8]
- 8005466:	fb02 f303 	mul.w	r3, r2, r3
- 800546a:	3b32      	subs	r3, #50	; 0x32
- 800546c:	461c      	mov	r4, r3
- 800546e:	f7fb fba1 	bl	8000bb4 <HAL_GetTick>
- 8005472:	4602      	mov	r2, r0
- 8005474:	687b      	ldr	r3, [r7, #4]
- 8005476:	1ad3      	subs	r3, r2, r3
- 8005478:	4619      	mov	r1, r3
- 800547a:	2324      	movs	r3, #36	; 0x24
- 800547c:	9301      	str	r3, [sp, #4]
- 800547e:	2360      	movs	r3, #96	; 0x60
- 8005480:	9300      	str	r3, [sp, #0]
- 8005482:	2300      	movs	r3, #0
- 8005484:	2202      	movs	r2, #2
- 8005486:	4620      	mov	r0, r4
- 8005488:	f7ff f958 	bl	800473c <UnityAssertGreaterOrLessOrEqualNumber>
+ 800545e:	68fb      	ldr	r3, [r7, #12]
+ 8005460:	68ba      	ldr	r2, [r7, #8]
+ 8005462:	fb02 f303 	mul.w	r3, r2, r3
+ 8005466:	3b32      	subs	r3, #50	; 0x32
+ 8005468:	461c      	mov	r4, r3
+ 800546a:	f7fb fba3 	bl	8000bb4 <HAL_GetTick>
+ 800546e:	4602      	mov	r2, r0
+ 8005470:	687b      	ldr	r3, [r7, #4]
+ 8005472:	1ad3      	subs	r3, r2, r3
+ 8005474:	4619      	mov	r1, r3
+ 8005476:	2324      	movs	r3, #36	; 0x24
+ 8005478:	9301      	str	r3, [sp, #4]
+ 800547a:	2360      	movs	r3, #96	; 0x60
+ 800547c:	9300      	str	r3, [sp, #0]
+ 800547e:	2300      	movs	r3, #0
+ 8005480:	2202      	movs	r2, #2
+ 8005482:	4620      	mov	r0, r4
+ 8005484:	f7ff f95a 	bl	800473c <UnityAssertGreaterOrLessOrEqualNumber>
 		TEST_ASSERT_LESS_THAN_UINT32(i*blink_duration + 50, HAL_GetTick() - t);
- 800548c:	68fb      	ldr	r3, [r7, #12]
- 800548e:	68ba      	ldr	r2, [r7, #8]
- 8005490:	fb02 f303 	mul.w	r3, r2, r3
- 8005494:	3332      	adds	r3, #50	; 0x32
- 8005496:	461c      	mov	r4, r3
- 8005498:	f7fb fb8c 	bl	8000bb4 <HAL_GetTick>
- 800549c:	4602      	mov	r2, r0
- 800549e:	687b      	ldr	r3, [r7, #4]
- 80054a0:	1ad3      	subs	r3, r2, r3
- 80054a2:	4619      	mov	r1, r3
- 80054a4:	2324      	movs	r3, #36	; 0x24
- 80054a6:	9301      	str	r3, [sp, #4]
- 80054a8:	2361      	movs	r3, #97	; 0x61
- 80054aa:	9300      	str	r3, [sp, #0]
- 80054ac:	2300      	movs	r3, #0
- 80054ae:	2204      	movs	r2, #4
- 80054b0:	4620      	mov	r0, r4
- 80054b2:	f7ff f943 	bl	800473c <UnityAssertGreaterOrLessOrEqualNumber>
+ 8005488:	68fb      	ldr	r3, [r7, #12]
+ 800548a:	68ba      	ldr	r2, [r7, #8]
+ 800548c:	fb02 f303 	mul.w	r3, r2, r3
+ 8005490:	3332      	adds	r3, #50	; 0x32
+ 8005492:	461c      	mov	r4, r3
+ 8005494:	f7fb fb8e 	bl	8000bb4 <HAL_GetTick>
+ 8005498:	4602      	mov	r2, r0
+ 800549a:	687b      	ldr	r3, [r7, #4]
+ 800549c:	1ad3      	subs	r3, r2, r3
+ 800549e:	4619      	mov	r1, r3
+ 80054a0:	2324      	movs	r3, #36	; 0x24
+ 80054a2:	9301      	str	r3, [sp, #4]
+ 80054a4:	2361      	movs	r3, #97	; 0x61
+ 80054a6:	9300      	str	r3, [sp, #0]
+ 80054a8:	2300      	movs	r3, #0
+ 80054aa:	2204      	movs	r2, #4
+ 80054ac:	4620      	mov	r0, r4
+ 80054ae:	f7ff f945 	bl	800473c <UnityAssertGreaterOrLessOrEqualNumber>
 	for(int i=1;i<5;i++){
- 80054b6:	68fb      	ldr	r3, [r7, #12]
- 80054b8:	3301      	adds	r3, #1
- 80054ba:	60fb      	str	r3, [r7, #12]
- 80054bc:	68fb      	ldr	r3, [r7, #12]
- 80054be:	2b04      	cmp	r3, #4
- 80054c0:	ddbe      	ble.n	8005440 <test_total_blink_length+0x12>
+ 80054b2:	68fb      	ldr	r3, [r7, #12]
+ 80054b4:	3301      	adds	r3, #1
+ 80054b6:	60fb      	str	r3, [r7, #12]
+ 80054b8:	68fb      	ldr	r3, [r7, #12]
+ 80054ba:	2b04      	cmp	r3, #4
+ 80054bc:	ddbe      	ble.n	800543c <test_total_blink_length+0x12>
 	}
 }
- 80054c2:	bf00      	nop
- 80054c4:	3714      	adds	r7, #20
- 80054c6:	46bd      	mov	sp, r7
- 80054c8:	bd90      	pop	{r4, r7, pc}
+ 80054be:	bf00      	nop
+ 80054c0:	3714      	adds	r7, #20
+ 80054c2:	46bd      	mov	sp, r7
+ 80054c4:	bd90      	pop	{r4, r7, pc}
 	...
 
-080054cc <ledctrl_blinkled>:
+080054c8 <ledctrl_blinkled>:
 
 
 
 //-------------------------EXPORTED FUNCTIONS-------------------------------
 int32_t ledctrl_blinkled(uint32_t num_blink, uint32_t ms_blink_duration)
 {
- 80054cc:	b590      	push	{r4, r7, lr}
- 80054ce:	b085      	sub	sp, #20
- 80054d0:	af00      	add	r7, sp, #0
- 80054d2:	6078      	str	r0, [r7, #4]
- 80054d4:	6039      	str	r1, [r7, #0]
+ 80054c8:	b590      	push	{r4, r7, lr}
+ 80054ca:	b085      	sub	sp, #20
+ 80054cc:	af00      	add	r7, sp, #0
+ 80054ce:	6078      	str	r0, [r7, #4]
+ 80054d0:	6039      	str	r1, [r7, #0]
 	if(num_blink < MIN_NUM_BLINKS){
- 80054d6:	687b      	ldr	r3, [r7, #4]
- 80054d8:	2b00      	cmp	r3, #0
- 80054da:	d102      	bne.n	80054e2 <ledctrl_blinkled+0x16>
+ 80054d2:	687b      	ldr	r3, [r7, #4]
+ 80054d4:	2b00      	cmp	r3, #0
+ 80054d6:	d102      	bne.n	80054de <ledctrl_blinkled+0x16>
 		return LEDCTRL_ERR;
- 80054dc:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 80054e0:	e04b      	b.n	800557a <ledctrl_blinkled+0xae>
+ 80054d8:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 80054dc:	e04b      	b.n	8005576 <ledctrl_blinkled+0xae>
 	}
 	if(num_blink > MAX_NUM_BLINKS){
- 80054e2:	687b      	ldr	r3, [r7, #4]
- 80054e4:	2b09      	cmp	r3, #9
- 80054e6:	d902      	bls.n	80054ee <ledctrl_blinkled+0x22>
+ 80054de:	687b      	ldr	r3, [r7, #4]
+ 80054e0:	2b09      	cmp	r3, #9
+ 80054e2:	d902      	bls.n	80054ea <ledctrl_blinkled+0x22>
 		return LEDCTRL_ERR;
- 80054e8:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 80054ec:	e045      	b.n	800557a <ledctrl_blinkled+0xae>
+ 80054e4:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 80054e8:	e045      	b.n	8005576 <ledctrl_blinkled+0xae>
 	}
 	if(ms_blink_duration < MIN_BLINK_DURATION){
- 80054ee:	683b      	ldr	r3, [r7, #0]
- 80054f0:	2b00      	cmp	r3, #0
- 80054f2:	d102      	bne.n	80054fa <ledctrl_blinkled+0x2e>
+ 80054ea:	683b      	ldr	r3, [r7, #0]
+ 80054ec:	2b00      	cmp	r3, #0
+ 80054ee:	d102      	bne.n	80054f6 <ledctrl_blinkled+0x2e>
 		return LEDCTRL_ERR;
- 80054f4:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 80054f8:	e03f      	b.n	800557a <ledctrl_blinkled+0xae>
+ 80054f0:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 80054f4:	e03f      	b.n	8005576 <ledctrl_blinkled+0xae>
 	}
 	if(ms_blink_duration > MAX_BLINK_DURATION){
- 80054fa:	683b      	ldr	r3, [r7, #0]
- 80054fc:	f640 32b7 	movw	r2, #2999	; 0xbb7
- 8005500:	4293      	cmp	r3, r2
- 8005502:	d902      	bls.n	800550a <ledctrl_blinkled+0x3e>
+ 80054f6:	683b      	ldr	r3, [r7, #0]
+ 80054f8:	f640 32b7 	movw	r2, #2999	; 0xbb7
+ 80054fc:	4293      	cmp	r3, r2
+ 80054fe:	d902      	bls.n	8005506 <ledctrl_blinkled+0x3e>
 		return LEDCTRL_ERR;
- 8005504:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 8005508:	e037      	b.n	800557a <ledctrl_blinkled+0xae>
+ 8005500:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 8005504:	e037      	b.n	8005576 <ledctrl_blinkled+0xae>
 	}
 	ms_blink_duration /=2;
- 800550a:	683b      	ldr	r3, [r7, #0]
- 800550c:	085b      	lsrs	r3, r3, #1
- 800550e:	603b      	str	r3, [r7, #0]
+ 8005506:	683b      	ldr	r3, [r7, #0]
+ 8005508:	085b      	lsrs	r3, r3, #1
+ 800550a:	603b      	str	r3, [r7, #0]
 	HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
- 8005510:	2200      	movs	r2, #0
- 8005512:	f44f 4180 	mov.w	r1, #16384	; 0x4000
- 8005516:	481b      	ldr	r0, [pc, #108]	; (8005584 <ledctrl_blinkled+0xb8>)
- 8005518:	f7fc f834 	bl	8001584 <HAL_GPIO_WritePin>
+ 800550c:	2200      	movs	r2, #0
+ 800550e:	f44f 4180 	mov.w	r1, #16384	; 0x4000
+ 8005512:	481b      	ldr	r0, [pc, #108]	; (8005580 <ledctrl_blinkled+0xb8>)
+ 8005514:	f7fc f836 	bl	8001584 <HAL_GPIO_WritePin>
 	for(int i=0;i<(num_blink);i++){
- 800551c:	2300      	movs	r3, #0
- 800551e:	60fb      	str	r3, [r7, #12]
- 8005520:	e026      	b.n	8005570 <ledctrl_blinkled+0xa4>
+ 8005518:	2300      	movs	r3, #0
+ 800551a:	60fb      	str	r3, [r7, #12]
+ 800551c:	e026      	b.n	800556c <ledctrl_blinkled+0xa4>
 		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
- 8005522:	2201      	movs	r2, #1
- 8005524:	f44f 4180 	mov.w	r1, #16384	; 0x4000
- 8005528:	4816      	ldr	r0, [pc, #88]	; (8005584 <ledctrl_blinkled+0xb8>)
- 800552a:	f7fc f82b 	bl	8001584 <HAL_GPIO_WritePin>
+ 800551e:	2201      	movs	r2, #1
+ 8005520:	f44f 4180 	mov.w	r1, #16384	; 0x4000
+ 8005524:	4816      	ldr	r0, [pc, #88]	; (8005580 <ledctrl_blinkled+0xb8>)
+ 8005526:	f7fc f82d 	bl	8001584 <HAL_GPIO_WritePin>
 		uint32_t t = HAL_GetTick();
- 800552e:	f7fb fb41 	bl	8000bb4 <HAL_GetTick>
- 8005532:	60b8      	str	r0, [r7, #8]
+ 800552a:	f7fb fb43 	bl	8000bb4 <HAL_GetTick>
+ 800552e:	60b8      	str	r0, [r7, #8]
 		while((t+ms_blink_duration) > HAL_GetTick());
- 8005534:	bf00      	nop
- 8005536:	68ba      	ldr	r2, [r7, #8]
- 8005538:	683b      	ldr	r3, [r7, #0]
- 800553a:	18d4      	adds	r4, r2, r3
- 800553c:	f7fb fb3a 	bl	8000bb4 <HAL_GetTick>
- 8005540:	4603      	mov	r3, r0
- 8005542:	429c      	cmp	r4, r3
- 8005544:	d8f7      	bhi.n	8005536 <ledctrl_blinkled+0x6a>
+ 8005530:	bf00      	nop
+ 8005532:	68ba      	ldr	r2, [r7, #8]
+ 8005534:	683b      	ldr	r3, [r7, #0]
+ 8005536:	18d4      	adds	r4, r2, r3
+ 8005538:	f7fb fb3c 	bl	8000bb4 <HAL_GetTick>
+ 800553c:	4603      	mov	r3, r0
+ 800553e:	429c      	cmp	r4, r3
+ 8005540:	d8f7      	bhi.n	8005532 <ledctrl_blinkled+0x6a>
 		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
- 8005546:	2200      	movs	r2, #0
- 8005548:	f44f 4180 	mov.w	r1, #16384	; 0x4000
- 800554c:	480d      	ldr	r0, [pc, #52]	; (8005584 <ledctrl_blinkled+0xb8>)
- 800554e:	f7fc f819 	bl	8001584 <HAL_GPIO_WritePin>
+ 8005542:	2200      	movs	r2, #0
+ 8005544:	f44f 4180 	mov.w	r1, #16384	; 0x4000
+ 8005548:	480d      	ldr	r0, [pc, #52]	; (8005580 <ledctrl_blinkled+0xb8>)
+ 800554a:	f7fc f81b 	bl	8001584 <HAL_GPIO_WritePin>
 		t = HAL_GetTick();
- 8005552:	f7fb fb2f 	bl	8000bb4 <HAL_GetTick>
- 8005556:	60b8      	str	r0, [r7, #8]
+ 800554e:	f7fb fb31 	bl	8000bb4 <HAL_GetTick>
+ 8005552:	60b8      	str	r0, [r7, #8]
 		while((t+ms_blink_duration) > HAL_GetTick());
- 8005558:	bf00      	nop
- 800555a:	68ba      	ldr	r2, [r7, #8]
- 800555c:	683b      	ldr	r3, [r7, #0]
- 800555e:	18d4      	adds	r4, r2, r3
- 8005560:	f7fb fb28 	bl	8000bb4 <HAL_GetTick>
- 8005564:	4603      	mov	r3, r0
- 8005566:	429c      	cmp	r4, r3
- 8005568:	d8f7      	bhi.n	800555a <ledctrl_blinkled+0x8e>
+ 8005554:	bf00      	nop
+ 8005556:	68ba      	ldr	r2, [r7, #8]
+ 8005558:	683b      	ldr	r3, [r7, #0]
+ 800555a:	18d4      	adds	r4, r2, r3
+ 800555c:	f7fb fb2a 	bl	8000bb4 <HAL_GetTick>
+ 8005560:	4603      	mov	r3, r0
+ 8005562:	429c      	cmp	r4, r3
+ 8005564:	d8f7      	bhi.n	8005556 <ledctrl_blinkled+0x8e>
 	for(int i=0;i<(num_blink);i++){
- 800556a:	68fb      	ldr	r3, [r7, #12]
- 800556c:	3301      	adds	r3, #1
- 800556e:	60fb      	str	r3, [r7, #12]
- 8005570:	68fb      	ldr	r3, [r7, #12]
- 8005572:	687a      	ldr	r2, [r7, #4]
- 8005574:	429a      	cmp	r2, r3
- 8005576:	d8d4      	bhi.n	8005522 <ledctrl_blinkled+0x56>
+ 8005566:	68fb      	ldr	r3, [r7, #12]
+ 8005568:	3301      	adds	r3, #1
+ 800556a:	60fb      	str	r3, [r7, #12]
+ 800556c:	68fb      	ldr	r3, [r7, #12]
+ 800556e:	687a      	ldr	r2, [r7, #4]
+ 8005570:	429a      	cmp	r2, r3
+ 8005572:	d8d4      	bhi.n	800551e <ledctrl_blinkled+0x56>
 	}
 	return LEDCTRL_OK;
- 8005578:	2300      	movs	r3, #0
+ 8005574:	2300      	movs	r3, #0
 }
- 800557a:	4618      	mov	r0, r3
- 800557c:	3714      	adds	r7, #20
- 800557e:	46bd      	mov	sp, r7
- 8005580:	bd90      	pop	{r4, r7, pc}
- 8005582:	bf00      	nop
- 8005584:	48000400 	.word	0x48000400
+ 8005576:	4618      	mov	r0, r3
+ 8005578:	3714      	adds	r7, #20
+ 800557a:	46bd      	mov	sp, r7
+ 800557c:	bd90      	pop	{r4, r7, pc}
+ 800557e:	bf00      	nop
+ 8005580:	48000400 	.word	0x48000400
 
-08005588 <__libc_init_array>:
- 8005588:	b570      	push	{r4, r5, r6, lr}
- 800558a:	4e0d      	ldr	r6, [pc, #52]	; (80055c0 <__libc_init_array+0x38>)
- 800558c:	4c0d      	ldr	r4, [pc, #52]	; (80055c4 <__libc_init_array+0x3c>)
- 800558e:	1ba4      	subs	r4, r4, r6
- 8005590:	10a4      	asrs	r4, r4, #2
- 8005592:	2500      	movs	r5, #0
- 8005594:	42a5      	cmp	r5, r4
- 8005596:	d109      	bne.n	80055ac <__libc_init_array+0x24>
- 8005598:	4e0b      	ldr	r6, [pc, #44]	; (80055c8 <__libc_init_array+0x40>)
- 800559a:	4c0c      	ldr	r4, [pc, #48]	; (80055cc <__libc_init_array+0x44>)
- 800559c:	f000 f820 	bl	80055e0 <_init>
- 80055a0:	1ba4      	subs	r4, r4, r6
- 80055a2:	10a4      	asrs	r4, r4, #2
- 80055a4:	2500      	movs	r5, #0
- 80055a6:	42a5      	cmp	r5, r4
- 80055a8:	d105      	bne.n	80055b6 <__libc_init_array+0x2e>
- 80055aa:	bd70      	pop	{r4, r5, r6, pc}
- 80055ac:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80055b0:	4798      	blx	r3
- 80055b2:	3501      	adds	r5, #1
- 80055b4:	e7ee      	b.n	8005594 <__libc_init_array+0xc>
- 80055b6:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80055ba:	4798      	blx	r3
- 80055bc:	3501      	adds	r5, #1
- 80055be:	e7f2      	b.n	80055a6 <__libc_init_array+0x1e>
- 80055c0:	080057c4 	.word	0x080057c4
- 80055c4:	080057c4 	.word	0x080057c4
+08005584 <__libc_init_array>:
+ 8005584:	b570      	push	{r4, r5, r6, lr}
+ 8005586:	4e0d      	ldr	r6, [pc, #52]	; (80055bc <__libc_init_array+0x38>)
+ 8005588:	4c0d      	ldr	r4, [pc, #52]	; (80055c0 <__libc_init_array+0x3c>)
+ 800558a:	1ba4      	subs	r4, r4, r6
+ 800558c:	10a4      	asrs	r4, r4, #2
+ 800558e:	2500      	movs	r5, #0
+ 8005590:	42a5      	cmp	r5, r4
+ 8005592:	d109      	bne.n	80055a8 <__libc_init_array+0x24>
+ 8005594:	4e0b      	ldr	r6, [pc, #44]	; (80055c4 <__libc_init_array+0x40>)
+ 8005596:	4c0c      	ldr	r4, [pc, #48]	; (80055c8 <__libc_init_array+0x44>)
+ 8005598:	f000 f820 	bl	80055dc <_init>
+ 800559c:	1ba4      	subs	r4, r4, r6
+ 800559e:	10a4      	asrs	r4, r4, #2
+ 80055a0:	2500      	movs	r5, #0
+ 80055a2:	42a5      	cmp	r5, r4
+ 80055a4:	d105      	bne.n	80055b2 <__libc_init_array+0x2e>
+ 80055a6:	bd70      	pop	{r4, r5, r6, pc}
+ 80055a8:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80055ac:	4798      	blx	r3
+ 80055ae:	3501      	adds	r5, #1
+ 80055b0:	e7ee      	b.n	8005590 <__libc_init_array+0xc>
+ 80055b2:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80055b6:	4798      	blx	r3
+ 80055b8:	3501      	adds	r5, #1
+ 80055ba:	e7f2      	b.n	80055a2 <__libc_init_array+0x1e>
+ 80055bc:	080057c0 	.word	0x080057c0
+ 80055c0:	080057c0 	.word	0x080057c0
+ 80055c4:	080057c0 	.word	0x080057c0
  80055c8:	080057c4 	.word	0x080057c4
- 80055cc:	080057c8 	.word	0x080057c8
 
-080055d0 <memset>:
- 80055d0:	4402      	add	r2, r0
- 80055d2:	4603      	mov	r3, r0
- 80055d4:	4293      	cmp	r3, r2
- 80055d6:	d100      	bne.n	80055da <memset+0xa>
- 80055d8:	4770      	bx	lr
- 80055da:	f803 1b01 	strb.w	r1, [r3], #1
- 80055de:	e7f9      	b.n	80055d4 <memset+0x4>
+080055cc <memset>:
+ 80055cc:	4402      	add	r2, r0
+ 80055ce:	4603      	mov	r3, r0
+ 80055d0:	4293      	cmp	r3, r2
+ 80055d2:	d100      	bne.n	80055d6 <memset+0xa>
+ 80055d4:	4770      	bx	lr
+ 80055d6:	f803 1b01 	strb.w	r1, [r3], #1
+ 80055da:	e7f9      	b.n	80055d0 <memset+0x4>
 
-080055e0 <_init>:
- 80055e0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80055e2:	bf00      	nop
- 80055e4:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80055e6:	bc08      	pop	{r3}
- 80055e8:	469e      	mov	lr, r3
- 80055ea:	4770      	bx	lr
+080055dc <_init>:
+ 80055dc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80055de:	bf00      	nop
+ 80055e0:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80055e2:	bc08      	pop	{r3}
+ 80055e4:	469e      	mov	lr, r3
+ 80055e6:	4770      	bx	lr
 
-080055ec <_fini>:
- 80055ec:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80055ee:	bf00      	nop
- 80055f0:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80055f2:	bc08      	pop	{r3}
- 80055f4:	469e      	mov	lr, r3
- 80055f6:	4770      	bx	lr
+080055e8 <_fini>:
+ 80055e8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80055ea:	bf00      	nop
+ 80055ec:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80055ee:	bc08      	pop	{r3}
+ 80055f0:	469e      	mov	lr, r3
+ 80055f2:	4770      	bx	lr
