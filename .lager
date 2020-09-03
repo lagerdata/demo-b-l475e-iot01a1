@@ -5,5 +5,5 @@ image = lagerdata/devenv-cortexm-stm32
 mount_dir = /app
 shell = /bin/bash
 cmd.build = headless-build.sh -build demo-b-l475e-iot01a1 -importAll /app
-cmd.clean = rm -rf Test;rm -rf Release;rm -rf Debug
+cmd.connect = lager connect --device stm32l4x --interface stlink --transport swd --speed 480 --force
 
