@@ -3,6 +3,7 @@
 	<name>demo-b-l475e-iot01a1</name>
 	<comment></comment>
 	<projects>
+		<project>demo-b-l475e-iot01a1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
