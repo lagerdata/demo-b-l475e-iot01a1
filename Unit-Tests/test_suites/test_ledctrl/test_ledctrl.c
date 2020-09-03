@@ -38,7 +38,7 @@ void test_check_min_number_blinks(void)
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_ERR, ret);
 	num_blink = 1;
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
-	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
+	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, -1);
 	num_blink = 2;
 	ret = ledctrl_blinkled(num_blink, ms_blink_duration);
 	TEST_ASSERT_EQUAL_INT(LEDCTRL_OK, ret);
